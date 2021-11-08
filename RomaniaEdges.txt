@@ -20,4 +20,4 @@ Oradea,Zerind,71
 Oradea,Sibiu,151
 Pitesti,RimnicuVilcea,97
 RimnicuVilcea,Sibiu,80
-Urziceni,Valslui,142
+Urziceni,Vaslui,142
