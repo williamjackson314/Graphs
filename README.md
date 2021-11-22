@@ -14,14 +14,18 @@
 **Data Structures**
 
 Adjacency List:
+
     Dictionary:
+    
         * Key: vertex name
         * Value: 
             - list of tuples where each tuple is an edge of the graph connected to the vertex specified
               by the key. Tuples have two parts: (adjacent vertex name, edge weight)
 
 Class Vertex:
+
     Has four fields:
+    
         * name: name of vertex
         * color: either 'White', 'Gray', or 'Black'. Used ofr BFS
         * d: the smallest total pth weight to get from a specified src vertex to this vertex
