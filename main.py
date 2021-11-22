@@ -1,5 +1,4 @@
 import csv
-import queue as q
 import heapq
 
 ''' Support Functions '''    
@@ -28,6 +27,32 @@ class Vertex :
         self.color = color
         self.d = d
         self.pi = pi
+
+def print_path(vertex_list, src_vertex, dest_vertex):
+    """
+
+    Parameters
+    ----------
+    vertex_list : Dictionary of Vertex objects
+        Vertex name as key and Vertex object as value.
+    
+    src_vertex : Vertex Object
+        The start point for the path to be printed.
+    
+    dest_vertex : Vertex object
+        The end point of the path to be printed.
+
+    Returns:
+        None.
+
+    """
+    predecessor = vertex_list[dest_vertex.pi]
+    print(dest_vertex.name + " <- ", end='')
+    while (predecessor.name != src_vertex.name):
+        print(predecessor.name + " <- ", end='')
+        predecessor = vertex_list[predecessor.pi]
+    print(src_vertex.name)
+
 
 ''' Adjacency List Functions '''
 def build_adj_list(vertices, edges) :
@@ -60,8 +85,9 @@ def print_graph(adj_list) :
     """
 
     Parameters:
-        adj_list - adjacency list implemented as a dictionary
-
+        param adj_list: adjacency list
+        type adj_list: dictionary
+    
     Returns: 
         None
 
@@ -84,7 +110,7 @@ def breadth_first_search(adj_list, source_vertex_name) :
         type vertex_name: Vertex object
 
     Returns: 
-        None
+        vertices: a dictionary with vertex name as key and Vertex object as value
 
     """
 
@@ -115,16 +141,7 @@ def breadth_first_search(adj_list, source_vertex_name) :
 
     return vertices
 
-''' Dijkstra's Algorithm Functions '''
-def print_path(vertex_list, src_vertex, dest_vertex):
-    
-    predecessor = vertex_list[dest_vertex.pi]
-    print(dest_vertex.name + " <- ", end='')
-    while (predecessor.name != src_vertex.name):
-        print(predecessor.name + " <- ", end='')
-        predecessor = vertex_list[predecessor.pi]
-    print(src_vertex.name)
-        
+''' Dijkstra's Algorithm Functions '''        
 def init(adj_list, src_vertex_name) :
     """    
     
@@ -136,7 +153,7 @@ def init(adj_list, src_vertex_name) :
         type src_vertex: Vertex object
 
     Returns:
-        vertices : a dictionary with vertex name as key and Vertex object as value
+        vertices: a dictionary with vertex name as key and Vertex object as value
 
     """
     
@@ -180,7 +197,7 @@ def dijkstras_algorithm(adj_list, src_vertex_name) :
         type src_vertex_name: Vertex object
 
     Returns:
-        None
+        vertices: a dictionary with vertex name as key and Vertex object as value
 
     """
     # initializes a dictionary of the form vertex_name : Vertex object
@@ -188,10 +205,13 @@ def dijkstras_algorithm(adj_list, src_vertex_name) :
 
     path_known = set(()) # set of vertices whose shortest path is known
     Q = [] # initialize priority queue
+    
+    # file priority queue
     for vertex in adj_list.keys() :
         vertex_tuple = (vertices[vertex].d, vertex) # build priority queue item
         heapq.heappush(Q, vertex_tuple) # add item to priority queue
     
+    # while priority queue is not empty
     while len(Q) > 0 :
         u = heapq.heappop(Q)[1] # retrieve second value in priority queue tuple: vertex name
         path_known.add(u)
@@ -222,10 +242,10 @@ def main() :
 
     # Read in edges of graph
     edges = read_csv_file("RomaniaEdges.txt")
-    
+
     # construct graph using Romania data
     romania_graph = build_adj_list(vertices, edges)
-    
+
     print("1: BFS\n2: Print Graph\n3: Dijkstras\n4: Quit")
     user_input = int(input())
     while user_input != 4 :
@@ -241,11 +261,10 @@ def main() :
             print_path(vertices, vertices["Arad"], vertices["Bucharest"])
         else:
             print("Invalid choice, try again: ")
-        
+
         print("1: BFS\n2: Print Graph\n3: Dijkstras\n4: Quit")
         user_input = int(input())
 
-    
     return None
 
 main()
