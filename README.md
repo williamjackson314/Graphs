@@ -10,35 +10,42 @@
         starting node, descendent node, edge weight
 
 # Graphs
+## Data Structures
 
-**Data Structures**
+**Adjacency List**
 
-Adjacency List:
+* Dictionary:
 
-    Dictionary:
-    
-        * Key: vertex name
-        * Value: 
-            - list of tuples where each tuple is an edge of the graph connected to the vertex specified
-              by the key. Tuples have two parts: (adjacent vertex name, edge weight)
+   * Key: 
+      - vertex name
+   * Value: 
+      - list of tuples where each tuple is an edge of the graph connected to the vertex specified
+        by the key. Tuples have two parts: (adjacent vertex name, edge weight)
 
-Class Vertex:
+**Class Vertex**
 
-    Has four fields:
-    
-        * name: name of vertex
-        * color: either 'White', 'Gray', or 'Black'. Used ofr BFS
-        * d: the smallest total pth weight to get from a specified src vertex to this vertex
-        * pi: the name of the previously visited vertex that is connected to this vertex 
+* Has four fields:
 
+   - name: name of vertex
+   - color: either 'White', 'Gray', or 'Black'. Used ofr BFS
+   - d: the smallest total pth weight to get from a specified src vertex to this vertex
+   - pi: the name of the previously visited vertex that is connected to this vertex 
 
-**1. Breadth First Search**
-* Queue: the BFS implementation needs a queue. This was implemented using a list and the append() and pop() methods. 
+**Queue** 
+* implemented using a list and the append() and pop() methods. 
+
+**Minimum Priority Queue**
+* heapq library was used, especially the push() and pop() methods.
+
+**Set**
+* used the set() and add() methods to implement the shortest known path set.
+
+## Functions
+**1. Breadth First Search (BFS)**
 * Print Path: the path printout from Arad to Bucharest is given in the main code, this is:
     
-    Bucharest <- Pitesti <- RimnicuVilcea <- Sibiu <- Arad
-    
-    
+      Bucharest <- Pitesti <- RimnicuVilcea <- Sibiu <- Arad
+
 **2. Print Graph**
 For the "Romania Graph implementation provided, the printout is shown below:
 
@@ -84,8 +91,6 @@ For the "Romania Graph implementation provided, the printout is shown below:
 
 
 **3. Dijkstra's Algorithm**
-* Min Priority Queue: used heapq to implement, especially the push() and pop() methods.
-* Set: used the set() and add() methods to implement the shortest known path set.
 * Print Path: the path printout from Arad to Bucharest is given in the main code, this is the same as that
               found using the BFS algorithm:
     
